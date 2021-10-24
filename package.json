@@ -1,0 +1,89 @@
+{
+	"name": "joe-vscode",
+	"author": {
+		"name": "Auguste Rame",
+		"url": "https://augustera.me"
+	},
+	"publisher": "AugusteRame",
+	"displayName": "Joe for VSCode",
+	"description": "A language client for `joe`.",
+	"version": "1.0.4",
+	"engines": {
+		"vscode": "^1.47.1"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:joe"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "joe.start",
+				"title": "Start Joe Language Server",
+				"category": "Joe Language Server"
+			},
+			{
+				"command": "joe.stop",
+				"title": "Stop Joe Language Server",
+				"category": "Joe Language Server"
+			},
+			{
+				"command": "joe.restart",
+				"title": "Restart Joe Language Server",
+				"category": "Joe Language Server"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Joe language client configuration",
+			"properties": {
+				"joe.path": {
+					"scope": "resource",
+					"type": "string",
+					"description": "Path to `zls` executable. Example: `C:/zls/zig-cache/bin/zls.exe`."
+				},
+				"joe.debugLog": {
+					"scope": "resource",
+					"type": "boolean",
+					"description": "Enable debug logging in release builds of zls."
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "joe",
+				"extensions": [
+					".joe"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile && yarn run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^7.0.0-next.9"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.13.21",
+		"@types/vscode": "^1.47.1",
+		"@typescript-eslint/eslint-plugin": "^2.26.0",
+		"@typescript-eslint/parser": "^2.26.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.9.7",
+		"vscode-test": "^1.3.0"
+	}
+}
